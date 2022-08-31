@@ -1,50 +1,7 @@
 import pandas
 import sqlalchemy
+from modules.biudzetas import Biudzetas
 
-
-class Irasas:
-    def __init__(self, suma):
-        self.suma = suma
-
-class PajamuIrasas(Irasas):
-    def __init__(self, suma, siuntejas, papildoma_info):
-        super().__init__(suma)
-        self.siuntejas = siuntejas
-        self.papildoma_info = papildoma_info
-
-class IslaiduIrasas(Irasas):
-    def __init__(self, suma, atsiskaitymo_budas, isigyta_preke_paslauga):
-        super().__init__(suma)
-        self.atsiskaitymo_budas = atsiskaitymo_budas
-        self.isigyta_preke_paslauga = isigyta_preke_paslauga
-
-class Biudzetas():
-    def __init__(self):
-        self.zurnalas = []
-
-    def ivesti_pajamas(self, suma, siuntejas, papildoma_informacija):
-        pajamu_irasas = PajamuIrasas(suma, siuntejas, papildoma_informacija)
-        self.zurnalas.append(pajamu_irasas)
-
-    def ivesti_islaidas(self, suma, atsiskaitymo_budas, isigyta_preke_paslauga):
-        islaidu_irasas = IslaiduIrasas(suma, atsiskaitymo_budas, isigyta_preke_paslauga)
-        self.zurnalas.append(islaidu_irasas)
-
-    def gauti_biudzeto_balansa(self):
-        balansas = 0
-        for irasas in self.zurnalas:
-            if isinstance(irasas, PajamuIrasas):
-                balansas += irasas.suma
-            if isinstance(irasas, IslaiduIrasas):
-                balansas -= irasas.suma
-        return balansas
-
-    def gauti_ataskaita(self):
-        for irasas in self.zurnalas:
-            if isinstance(irasas, PajamuIrasas):
-                print(f"Pajamos: {irasas.suma} {irasas.siuntejas} {irasas.papildoma_info}")
-            if isinstance(irasas, IslaiduIrasas):
-                print(f"Islaidos: {irasas.suma} {irasas.atsiskaitymo_budas} {irasas.isigyta_preke_paslauga}")
 
 mano_biudzetas = Biudzetas()
 
